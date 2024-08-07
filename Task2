@@ -1,0 +1,53 @@
+package Chatbox;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Task2 {
+    private static Map<String, String> responses = new HashMap<>();
+
+    public static void main(String[] args) {
+        initializeResponses();
+        Scanner scanner = new Scanner(System.in);
+        String userInput;
+
+        System.out.println("Helhilo! I’m your friendly chatbot. How can I help you today?");
+
+        while (true) {
+            System.out.print("You: ");
+            userInput = scanner.nextLine().toLowerCase();
+
+            if (userInput.equals("exit") || userInput.equals("quit")) {
+                System.out.println("Chatbot: Goodbye! Have a great day!");
+                break;
+            }
+
+            String response = getResponse(userInput);
+            System.out.println("Chatbot: " + response);
+        }
+
+        scanner.close();
+    }
+
+    private static void initializeResponses() {
+        responses.put("hi", "Hello! How can I assist you?");
+        responses.put("hello", "Hi there! What can I do for you?");
+        responses.put("how are you", "I'm just a bunch of code, but I'm here to help you!");
+        responses.put("what is your name", "I'm a chatbot created to assist you with your queries.");
+        responses.put("bye", "Goodbye! Feel free to reach out if you have more questions.");
+        responses.put("help", "I'm here to answer your questions. You can ask me anything!");
+        responses.put("what is ai", "Artificial Intelligence is the simulation of human intelligence in machines.");
+        responses.put("what is machine learning", "Machine Learning is a subset of AI that allows computers to learn from data without being explicitly programmed.");
+    }
+
+    private static String getResponse(String userInput) {
+        for (Map.Entry<String, String> entry : responses.entrySet()) {
+            if (userInput.contains(entry.getKey())) {
+                return entry.getValue();
+            }
+        }
+        return "I'm sorry, I don't understand that. Can you please rephrase?";
+    }
+}
+
